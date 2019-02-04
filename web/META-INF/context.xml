@@ -1,31 +1,26 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<taglib xmlns="http://java.sun.com/xml/ns/javaee"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
-        version="2.1">
-
-    <tlib-version>1.0</tlib-version>
-    <short-name>myshortname</short-name>
-    <uri>http://mycompany.com</uri>
-
-    <!-- Invoke 'Generate' action to add tags or functions -->
-
-</taglib>
-=======
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<taglib xmlns="http://java.sun.com/xml/ns/javaee"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
-        version="2.1">
-
-    <tlib-version>1.0</tlib-version>
-    <short-name>myshortname</short-name>
-    <uri>http://mycompany.com</uri>
-
-    <!-- Invoke 'Generate' action to add tags or functions -->
-
-</taglib>
->>>>>>> 7165c9fdd304d19d288f5e585479135b5722ed13
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/cis320"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="50"
+              maxWaitMillis="-1"
+              username="cis320"
+              password="flakkadakka"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://cis320.cbzaoqzffwof.us-east-2.rds.amazonaws.com:3306/cis320"
+              maxActive="15"
+              maxIdle="3"
+              testOnBorrow="true"
+              removeAbandoned="true"
+              removeAbandonedTimeout="55"
+              validationQuery="SELECT 1"
+              validationInterval="34000"
+              timeBetweenEvictionRunsMillis="34000"
+              minEvictableIdleTimeMillis="55000"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+    />
+    <ResourceLink name="jdbc/cis320"
+                  global="jdbc/cis320"
+                  type="javax.sql.DataSource" />
+</Context>
