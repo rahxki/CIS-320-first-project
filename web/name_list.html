@@ -60,12 +60,20 @@
             </div>
             <div class="modal-body">
                 <form id="my-form" name="my-form">
-                    <div class="form-group">
-                        <label for="firstName">First Name:</label> <input type="hidden" id="id" name="id" class="form-control"><br>
-                        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name"><br>
-                        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name"><br>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Email address"><br>
-                    </div>
+                        <!-- See http://getbootstrap.com/css/#forms-control-validation for styling info. -->
+                        <div id="firstNameDiv" class="form-group has-feedback">
+                            <label class="control-label" for="firstName">First Name:</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name" aria-describedby="firstNameStatus"/>
+                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name" aria-describedby="lastNameStatus"/>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email address"aria-describedby="emailAddressStatus"/>
+                            <span id="firstNameGlyph" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span id="firstNameStatus" class="sr-only"></span>
+                            <span id="lasttNameGlyph" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span id="lasttNameStatus" class="sr-only"></span>
+                            <span id="emailAddressGlyph" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span id="emailAddressStatus" class="sr-only"></span>
+                            <!-- Text goes in firstNameStatus for screen readers that can't see our icons. -->
+                        </div>
                 </form>
             </div>
             <div class="modal-footer">
