@@ -49,6 +49,8 @@ function updateTable() {
 
     function saving() {
 
+        var checkPass = 1;
+
         var firstCheck = $('#firstName').val();
         var lastCheck = $('#lastName').val();
         var emailCheck = $('#email').val();
@@ -58,36 +60,65 @@ function updateTable() {
         var emailTest = /^[A-Za-z]{1,30}@[A-Za-z]{1,10}[.][a-z]{3,3}$/;
 
         if (firstTest.test(firstCheck)) {
-            console.log("Ok")
+
             $('#firstName').removeClass("is-invalid");
             $('#firstName').addClass("is-valid");
         } else {
-            console.log("Bad")
+
             $('#firstName').removeClass("is-valid");
             $('#firstName').addClass("is-invalid");
+            checkPass = 0;
         }
 
         if (lastTest.test(lastCheck)) {
-            console.log("Ok")
+
             $('#lastName').removeClass("is-invalid");
             $('#lastName').addClass("is-valid");
 
         } else {
-            console.log("Bad")
+
             $('#lastName').removeClass("is-valid");
             $('#lastName').addClass("is-invalid");
+            checkPass = 0;
         }
 
         if (emailTest.test(emailCheck)) {
-            console.log("Ok")
+
             $('#email').removeClass("is-invalid");
             $('#email').addClass("is-valid");
         } else {
-            console.log("Bad")
+
             $('#email').removeClass("is-valid");
             $('#email').addClass("is-invalid");
+            checkPass = 0;
         }
-        console.log("Saved!");
+
+        if (checkPass = 1){
+
+            console.log("saved!")
+
+            var url2 = "api/name_list_edit";
+            var dataToServer = { first : firstCheck, last : lastCheck, email : emailCheck };
+
+            $.ajax({
+                type: 'POST',
+                url: url2,
+                data: JSON.stringify(dataToServer),
+                success: function(dataFromServer) {
+                    console.log(dataFromServer);
+                },
+                contentType: "application/json",
+                dataType: 'text' // Could be JSON or whatever too
+            });
+
+
+
+        }
+
+        checkPass = 1;
+
+        $.ajax().reload();
+
     }
 
 

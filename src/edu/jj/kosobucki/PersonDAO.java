@@ -20,6 +20,49 @@ public class PersonDAO {
      * Get a list of the people in the database.
      * @return Returns a list of instances of the People class.
      */
+
+    public static void adder(AddEntry fromJson) {
+
+        log.log(Level.FINE, "Add people");
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+
+            conn = DBHelper.getConnection();
+
+            String sql = "INSERT INTO person (first, last, email) VALUES (?, ?, ?);";
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, fromJson.getFirstName());
+            stmt.setString(2, fromJson.getLastName());
+            stmt.setString(3, fromJson.getEmailName());
+
+            //System.out.println("Object test: "+fromJson.getFirstName() +fromJson.getLastName() +fromJson.getEmailName());
+
+        } catch (SQLException se) {
+            log.log(Level.SEVERE, "SQL Error", se);
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "Error", e);
+        } finally {
+            // Ok, close our result set, statement, and connection
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                log.log(Level.SEVERE, "Error", e);
+            }
+            try {
+                conn.close();
+            } catch (Exception e) {
+                log.log(Level.SEVERE, "Error", e);
+            }
+        }
+
+
+
+    }
+
     public static List<Person> getPeople() {
         log.log(Level.FINE, "Get people");
 
@@ -80,6 +123,7 @@ public class PersonDAO {
             try { stmt.close(); } catch (Exception e) { log.log(Level.SEVERE, "Error", e ); }
             try { conn.close(); } catch (Exception e) { log.log(Level.SEVERE, "Error", e ); }
         }
+
         // Done! Return the results
         return list;
     }
