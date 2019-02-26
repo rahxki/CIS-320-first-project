@@ -32,14 +32,18 @@ public class PersonDAO {
 
             conn = DBHelper.getConnection();
 
-            String sql = "INSERT INTO person (first, last, email) VALUES (?, ?, ?);";
+            String sql = "INSERT INTO person (first, last, email, phone, birthday) VALUES (?, ?, ?, ?, ?);";
             stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, fromJson.getFirstName());
             stmt.setString(2, fromJson.getLastName());
             stmt.setString(3, fromJson.getEmailName());
+            stmt.setString(4, fromJson.getPhoneName());
+            stmt.setString(5, fromJson.getBirthdayName());
 
-            //System.out.println("Object test: "+fromJson.getFirstName() +fromJson.getLastName() +fromJson.getEmailName());
+            stmt.executeUpdate();
+
+            System.out.println("Object test: "+fromJson.getFirstName() +fromJson.getLastName() +fromJson.getEmailName() +fromJson.getPhoneName() +fromJson.getBirthdayName());
 
         } catch (SQLException se) {
             log.log(Level.SEVERE, "SQL Error", se);

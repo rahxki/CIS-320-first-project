@@ -54,10 +54,14 @@ function updateTable() {
         var firstCheck = $('#firstName').val();
         var lastCheck = $('#lastName').val();
         var emailCheck = $('#email').val();
+        var phoneCheck = $('#phone').val();
+        var birthdayCheck = $('#birthday').val();
 
         var firstTest = /^[A-Za-z]{1,30}$/;
         var lastTest = /^[A-Za-z]{1,30}$/;
         var emailTest = /^[A-Za-z]{1,30}@[A-Za-z]{1,10}[.][a-z]{3,3}$/;
+        var phoneTest = /^[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]/i;
+        var birthdayTest = /^[0-9]{4,4}-[0-1][0-9]-[0-3][1-9]$/;
 
         if (firstTest.test(firstCheck)) {
 
@@ -93,12 +97,38 @@ function updateTable() {
             checkPass = 0;
         }
 
-        if (checkPass = 1){
+        if(phoneTest.test(phoneCheck)){
+
+            $('#phone').removeClass("is-invalid");
+            $('#phone').addClass("is-valid");
+
+        } else {
+
+            $('#phone').removeClass("is-valid");
+            $('#phone').addClass("is-invalid");
+            checkPass = 0;
+
+        }
+
+        if(birthdayTest.test(birthdayCheck)){
+
+            $('#birthday').removeClass("is-invalid");
+            $('#birthday').addClass("is-valid");
+
+        } else {
+
+            $('#birthday').removeClass("is-valid");
+            $('#birthday').addClass("is-invalid");
+            checkPass = 0;
+
+        }
+
+        if (checkPass == 1){
 
             console.log("saved!")
 
             var url2 = "api/name_list_edit";
-            var dataToServer = { first : firstCheck, last : lastCheck, email : emailCheck };
+            var dataToServer = { first : firstCheck, last : lastCheck, email : emailCheck, phone : phoneCheck, birthday : birthdayCheck };
 
             $.ajax({
                 type: 'POST',
@@ -112,12 +142,11 @@ function updateTable() {
             });
 
 
+            location.reload();
 
         }
 
         checkPass = 1;
-
-        $.ajax().reload();
 
     }
 

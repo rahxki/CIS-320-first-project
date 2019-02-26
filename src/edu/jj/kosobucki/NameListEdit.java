@@ -43,7 +43,7 @@ public class NameListEdit extends HttpServlet {
         AddEntry fromJson = gson.fromJson(requestString, AddEntry.class);
 
         // Make sure our field was set.
-        System.out.println("Object test: "+fromJson.getFirstName() +fromJson.getLastName() +fromJson.getEmailName());
+        //System.out.println("Object test: "+fromJson.getFirstName() +fromJson.getLastName() +fromJson.getEmailName());
 
        PersonDAO.adder(fromJson);
     }
