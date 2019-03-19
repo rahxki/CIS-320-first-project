@@ -10,14 +10,45 @@ function updateTable() {
 
             for (var i = 0; i < json_result.length; i++) {
 
-                phonestring = json_result[i].phone
+                var phonestring = json_result[i].phone;
 
-                phone = phonestring.substring(0,3) + "-" + phonestring.substring(3,6) + "-" + phonestring.substring(6,11)
+                if(phonestring) {
+                    var phone = phonestring.substring(0, 3) + "-" + phonestring.substring(3, 6) + "-" + phonestring.substring(6, 11);
+                } else {
 
-                $('#datatable tr:last').before('<tr><td><td>' + json_result[i].id + '</td><td>' + json_result[i].first + '</td><td>' + json_result[i].last + '</td><td>' + json_result[i].email + '</td><td>' + phone + '</td><td>' + json_result[i].birthday + '</td>' + '</td></tr>')
+                    var phone = " ";
+
+                }
+
+                $('#datatable tr:last').before('<tr><td><td><button type=\'button\' name=\'delete\' class=\'deletebutton\' value=\'' + json_result[i].id + '\'>Delete Record</button></td><td>' + json_result[i].id + '</td><td>' + json_result[i].first + '</td><td>' + json_result[i].last + '</td><td>' + json_result[i].email + '</td><td>' + phone + '</td><td>' + json_result[i].birthday + '</td>' + '</td></tr>');
 
                 console.log(json_result[i].first);
             }
+
+        function deleteItem(id) {
+            console.debug("Delete");
+            console.debug(id.target.value);
+
+            var url3 = "api/name_list_delete";
+            var dataToServer = { id : id };
+
+            $.ajax({
+                type: 'POST',
+                url: url3,
+                data: JSON.stringify(dataToServer),
+                success: function(dataFromServer) {
+                    console.log(dataFromServer);
+                },
+                contentType: "application/json",
+                dataType: 'text' // Could be JSON or whatever too
+            });
+
+            location.reload();
+        }
+
+        var button = $(".deletebutton");
+        button.on("click", deleteItem);
+
             console.log("Done");
         }
     );
@@ -149,7 +180,6 @@ function updateTable() {
         checkPass = 1;
 
     }
-
 
 }
 
