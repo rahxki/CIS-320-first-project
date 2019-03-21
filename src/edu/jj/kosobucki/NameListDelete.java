@@ -14,9 +14,7 @@ import com.google.gson.Gson;
 
 @WebServlet(name = "NameListDelete")
 
-public class NameListDelete {
-
-    private int id1;
+public class NameListDelete extends HttpServlet  {
 
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -34,11 +32,11 @@ public class NameListDelete {
         for (String line; (line = in.readLine()) != null; requestString += line) ;
 
         // Output the string we got as a request, just as a check
-        //System.out.println(requestString);
+        System.out.println(requestString);
+        Gson gson = new Gson();
+        Person idGet = gson.fromJson(requestString, Person.class);
 
-        String id2 = request.getParameter("+fromJson.getid()");
-        id1 = Integer.valueOf(id2);
-        PersonDAO.remover(id1);
+        PersonDAO.remover(idGet);
 
     }
 

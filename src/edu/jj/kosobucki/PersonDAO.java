@@ -21,7 +21,7 @@ public class PersonDAO {
      * @return Returns a list of instances of the People class.
      */
 
-    public static void remover(int idNum){
+    public static void remover(Person idNum){
 
         log.log(Level.FINE, "Remove people");
 
@@ -35,7 +35,7 @@ public class PersonDAO {
             String sql = "DELETE FROM person WHERE id = ?";
             stmt = conn.prepareStatement(sql);
 
-            stmt.setInt(1, idNum);
+            stmt.setInt(1, idNum.getId());
 
             stmt.executeUpdate();
 

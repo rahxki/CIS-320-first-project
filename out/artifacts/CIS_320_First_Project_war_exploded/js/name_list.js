@@ -25,12 +25,14 @@ function updateTable() {
                 console.log(json_result[i].first);
             }
 
-        function deleteItem(id) {
+        function deleteItem(e) {
             console.debug("Delete");
-            console.debug(id.target.value);
+            console.debug(e.target.value);
 
             var url3 = "api/name_list_delete";
-            var dataToServer = { id : id };
+            var dataToServer = { id : e.target.value };
+
+            console.debug(dataToServer);
 
             $.ajax({
                 type: 'POST',

@@ -23,10 +23,10 @@
         <url-pattern>/api/name_list_edit</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
+    <servlet>
         <servlet-name>NameListDelete</servlet-name>
-        <url-pattern>edu.jj.kosobucki.NameListDelete</url-pattern>
-    </servlet-mapping>
+        <servlet-class>edu.jj.kosobucki.NameListDelete</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>NameListDelete</servlet-name>
