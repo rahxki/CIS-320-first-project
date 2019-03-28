@@ -51,6 +51,7 @@ public class NameListEdit extends HttpServlet {
         // Output the string we got as a request, just as a check
         //System.out.println(requestString);
 
+        String id = request.getParameter("+fromJson.getId()");
         String name = request.getParameter("+fromJson.getFirstName()");
         String last = request.getParameter("+fromJson.getLastName()");
         String email = request.getParameter("+fromJson.getEmailName()");
@@ -105,8 +106,9 @@ public class NameListEdit extends HttpServlet {
             checker = 0;
         }
 
-        if(checker != 0) {
+        if(checker != 0 && id != null) {
+            PersonDAO.updater(fromJson);
+        } else
             PersonDAO.adder(fromJson);
-        }
     }
 }

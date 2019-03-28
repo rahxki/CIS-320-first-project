@@ -1,7 +1,10 @@
 package edu.jj.kosobucki;
 
 public class AddEntry {
-    private String first, last, email, phone, birthday;
+    private String id, first, last, email, phone, birthday;
+
+    public String getIdName() { return id; }
+    public void setIdName(String id) { this.id = id; }
 
     public String getFirstName() { return first; }
     public void setFirstName(String first) { this.first = first; }
