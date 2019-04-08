@@ -4,7 +4,57 @@ function editItem(e) {
     console.debug("Edit");
     console.debug(e.target.value);
 
-    //Location.reload();
+    // Grab the id from the event
+    var id = e.target.value;
+
+    // This next line is fun.
+    // "e" is the event of the mouse click
+    // "e.target" is what the user clicked on. The button in this case.
+    // "e.target.parentNode" is the node that holds the button. In this case, the table cell.
+    // "e.target.parentNode.parentNode" is the parent of the table cell. In this case, the table row.
+    // "e.target.parentNode.parentNode.querySelectorAll("td")" gets an array of all matching table cells in the row
+    // "e.target.parentNode.parentNode.querySelectorAll("td")[0]" is the first cell. (You can grab cells 0, 1, 2, etc.)
+    // "e.target.parentNode.parentNode.querySelectorAll("td")[0].innerHTML" is content of that cell. Like "Sam" for example.
+    // How did I find this long chain? Just by setting a breakpoint and using the interactive shell in my browser.
+    var firstName = e.target.parentNode.parentNode.querySelectorAll("td")[0].innerHTML;
+    var lastName = e.target.parentNode.parentNode.querySelectorAll("td")[1].innerHTML;
+    var emailName = e.target.parentNode.parentNode.querySelectorAll("td")[2].innerHTML;
+    var phoneName = e.target.parentNode.parentNode.querySelectorAll("td")[3].innerHTML;
+    var birthdayName = e.target.parentNode.parentNode.querySelectorAll("td")[4].innerHTML;
+
+    $('#id').val(id); // Yes, now we set and use the hidden ID field
+    $('#firstName').val(firstName);
+    $('#lastName').val(lastName);
+    $('#email').val(emailName);
+    $('#phone').val(phoneName);
+    $('#birthday').val(birthdayName);
+    $('#myModal').modal('show');
+
+        console.log("saved!")
+
+        var url2 = "api/name_list_edit";
+        var dataToServer = {
+            id: id,
+            first: firstCheck,
+            last: lastCheck,
+            email: emailCheck,
+            phone: phoneCheck,
+            birthday: birthdayCheck
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: url2,
+            data: JSON.stringify(dataToServer),
+            success: function (dataFromServer) {
+                console.log(dataFromServer);
+            },
+            contentType: "application/json",
+            dataType: 'text' // Could be JSON or whatever too
+        });
+
+
+    location.reload();
 }
 
 function deleteItem(e) {
@@ -124,12 +174,9 @@ function saving() {
             dataType: 'text' // Could be JSON or whatever too
         });
 
-
         location.reload();
 
     }
-
-    checkPass = 1;
 
 }
 
@@ -146,7 +193,7 @@ function updateTable() {
                 var phonestring = json_result[i].phone;
 
                 if(phonestring) {
-                    var phone = phonestring.substring(0, 3) + "-" + phonestring.substring(3, 6) + "-" + phonestring.substring(6, 11);
+                    var phone = phonestring.substring(0, 3) + phonestring.substring(3, 6) + phonestring.substring(6, 11);
                 } else {
 
                     var phone = " ";
